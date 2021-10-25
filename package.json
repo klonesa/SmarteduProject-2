@@ -1,0 +1,25 @@
+{
+  "name": "smarteduproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omerfaruk-sahin/SmarteduProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omerfaruk-sahin/SmarteduProject/issues"
+  },
+  "homepage": "https://github.com/omerfaruk-sahin/SmarteduProject#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
