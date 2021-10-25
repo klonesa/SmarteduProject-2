@@ -1,14 +1,32 @@
-const express=require('express')
-const app =express()
+const express = require("express");
+const ejs = require("ejs");
+const mongoose = require("mongoose");
 
-const port=3000
+const app = express();
+
+const pageRoute = require("./routes/pageRoute");
+const courseRoute = require("./routes/courseRoute");
+const port = 3000;
+
+// DB connected
+mongoose.connect("mongodb://localhost/SmartEduPjct")
+.then(() => {
+    console.log("DB connected");
+  })
+.catch((err) => {
+    console.log(err);
+  });
+
 // Middlewares
-app.use(express.static('puplic'))
+app.use(express.static("puplic"));
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true }));
+//TEMPLATE ENGINE
+app.set("view engine", "ejs");
 
-app.get('/',(req,res)=>{
-    res.send('istek gönderildi.')
-})
+app.use("/", pageRoute);
+app.use("/courses", courseRoute);
 
-app.listen(port,()=>{
-    console.log(`Sunucu 'http://localhost:3000/'  ile başlatıldı...`)
-})
+app.listen(port, () => {
+  console.log(`Sunucu 'http://localhost:3000/'  ile başlatıldı...`);
+});
