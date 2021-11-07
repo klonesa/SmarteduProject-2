@@ -2,6 +2,7 @@ const express = require("express");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const session = require('express-session')
+const MongoStore = require('connect-mongo');
 
 const app = express();
 
@@ -24,7 +25,7 @@ mongoose
 app.set("view engine", "ejs");
 
 //Global variaable
-global.userIN = null;
+global.userID = null;
 // Middlewares
 app.use(express.static("puplic"));
 app.use(express.json()); // for parsing application/json
@@ -32,10 +33,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: 'session_id',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: 'mongodb://localhost/SmartEduPjct' })
 }))
 app.use('*', (req, res, next) => {
-  userIN = req.session.userIN;
+  userID = req.session.userID;
   next();
 });
 
